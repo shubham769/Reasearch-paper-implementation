@@ -26,12 +26,12 @@ def get_prediction():
     if request.method == 'POST':
         data = request.get_json()  # Get data posted as a json
         data = np.array(data)[np.newaxis, :]  # converts shape from (4,) to (1, 4)
-        prediction = model.predict(data.reshape(1, -1))  # runs globally loaded model on the data
+        prediction = model.predict(data)  # runs globally loaded model on the data
         if prediction[0] == 0:
-            output = 'no bug'
-        if prediction[0] == 1:
-            output = 'bug'
-            
+            output = 'no bug found'
+        else:
+            output = 'bug found'
+        print(prediction)
     return str(output)
 
 
